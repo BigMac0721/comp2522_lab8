@@ -116,6 +116,8 @@ public class Game
                 break;
             }
         }
+
+        scan.close();
     }
 
     public static void main(final String[] args)
