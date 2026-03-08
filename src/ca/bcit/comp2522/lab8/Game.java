@@ -7,7 +7,7 @@ import java.util.Scanner;
  * Logic for the main game and the main game loop
  *
  * @author Giant
- * @author
+ * @author Jiahao Zhu
  *
  * @version 2026
  */
@@ -17,10 +17,17 @@ public class Game
     private final String secretCountry;
     private final int countryLength;
     private int attempt;
+    private static final int INIT_ATTEMPT_COUNTER = 0;
+    private static final int INIT_POSITION = 0;
+    private static final int FOR_LOOP_DEFAULT_INIT = 0;
 
+    /**
+     * Game constructor.
+     * Initializes game variables and starts the game.
+     */
     public Game()
     {
-        attempt = 0;
+        attempt = INIT_ATTEMPT_COUNTER;
         countries = WordList.COUNTRY_LIST;
         secretCountry = pickSecretCountry();
         countryLength = secretCountry.length();
@@ -29,6 +36,9 @@ public class Game
         mainGame();
     }
 
+    /**
+     * Prints the game introduction information.
+     */
     private void printHeaderInformation()
     {
         System.out.println("LUCKY VAULT — COUNTRY MODE. Type QUIT to exit.");
@@ -36,6 +46,11 @@ public class Game
         System.out.println("Current best: " + "-");
     }
 
+    /**
+     * Randomly selects a secret country from the list.
+     *
+     * @return randomly chosen country
+     */
     private String pickSecretCountry()
     {
         final int randomIndex;
@@ -44,9 +59,16 @@ public class Game
         return countries.get(randomIndex);
     }
 
+    /**
+     * Checks if the user's guess is correct.
+     *
+     * @param input user's guess
+     * @return true if the guess is correct, otherwise false
+     */
     private boolean isCorrectGuess(String input)
     {
-        int correctPosition = 0;
+        int correctPosition;
+        correctPosition = INIT_POSITION;
 
         if(input.length() != countryLength)
         {
@@ -60,7 +82,7 @@ public class Game
         }
         else
         {
-            for(int i = 0; i < countryLength; i++)
+            for(int i = FOR_LOOP_DEFAULT_INIT; i < countryLength; i++)
             {
                if(input.charAt(i) == secretCountry.charAt(i))
                {
@@ -68,12 +90,19 @@ public class Game
                }
             }
 
-            System.out.println("Not it. " + correctPosition + " letter(s) corect (right position).");
+            System.out.println("Not it. " + correctPosition + " letter(s) correct (right position).");
         }
 
         return false;
     }
 
+    /**
+     * Checks if the user's input is empty.
+     *
+     * @param input user input
+     *
+     * @return true if empty or null, false otherwise
+     */
     private boolean isEmptyGuess(final String input)
     {
         if(input == null || input.isEmpty())
@@ -86,10 +115,18 @@ public class Game
         return false;
     }
 
+    /**
+     * Main game loop.
+     * Continuously reads guesses from the user until:
+     * - the correct answer is guessed
+     * - or the user types QUIT
+     */
     public void mainGame()
     {
         String input;
-        final Scanner scan = new Scanner(System.in);
+        final Scanner scan;
+
+        scan = new Scanner(System.in);
 
         while(true)
         {
@@ -120,6 +157,11 @@ public class Game
         scan.close();
     }
 
+    /**
+     * Program entry point. instantiate the game object.
+     *
+     * @param args command line arguments(not used)
+     */
     public static void main(final String[] args)
     {
         Game test = new Game();
