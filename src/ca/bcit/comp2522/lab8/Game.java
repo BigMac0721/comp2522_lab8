@@ -6,20 +6,22 @@ import java.util.Scanner;
 /**
  * Logic for the main game and the main game loop
  *
- * @author Giant
+ * @author Giant Mak
  * @author Jiahao Zhu
  *
  * @version 2026
  */
 public class Game
 {
-    private final List<String> countries;
-    private final String secretCountry;
-    private final int countryLength;
-    private int attempt;
     private static final int INIT_ATTEMPT_COUNTER = 0;
     private static final int INIT_POSITION = 0;
     private static final int FOR_LOOP_DEFAULT_INIT = 0;
+
+    private final List<String> countries;
+    private final String secretCountry;
+    private final int countryLength;
+
+    private int attempt;
 
     /**
      * Game constructor.
@@ -65,7 +67,7 @@ public class Game
      * @param input user's guess
      * @return true if the guess is correct, otherwise false
      */
-    private boolean isCorrectGuess(String input)
+    private boolean isCorrectGuess(final String input)
     {
         int correctPosition;
         correctPosition = INIT_POSITION;
@@ -164,6 +166,7 @@ public class Game
      */
     public static void main(final String[] args)
     {
-        Game test = new Game();
+       final Game test;
+       test= new Game();
     }
 }
